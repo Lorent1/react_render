@@ -1,0 +1,53 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #240046;
+  padding: 20px;
+}
+
+.codeBlock{
+  width: 800px;
+  height: 500px;
+  background-color: #1d1f27;
+  display: flex;
+  flex-direction: column;
+  border: solid #1d1f27 4px;
+}
+
+.codeInputHeader{
+  width: 100%;
+  height: 40px;
+  background-color: #1d1f27;
+}
+
+.codeMirror{
+  display: flex;
+  height: 100%;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.renderBox{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 500px;
+  border: solid #1d1f27 4px;
+  background-color: #282b37;
+}
+
+.renderButton{
+  width: 80px;
+  height: 30px;
+  border-radius: 12px;
+  border-width: 0px;
+}
+
+.renderBoxHeader{
+  width: 100%;
+  height: 40px;
+  background-color: #1d1f27;
+}
