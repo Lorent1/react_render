@@ -1,29 +1,25 @@
 
-import styles from "./page.module.css";
+import styles from "../styles/page.module.css";
 
 import CodeMirror, { ViewUpdate } from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import { dracula } from "@uiw/codemirror-theme-dracula";
 
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 
-export default function CodeInput(){
-    const [value, setValue] = useState(
-`{
-  "union":{
-    "sphere": {
-      "color": [0, 0, 0]
-    }
-  }
-}`);
+interface props{
+  value: string,
+  setValue: (val: string) => void;
+}
 
+export default function CodeInput(props: props){
     const onChange = useCallback((val: string, viewUpdate: ViewUpdate) => {
-      setValue(val);
+      props.setValue(val);
     }, []);
     return (
         <div className={styles.codeBlock}>
             <header className={styles.codeInputHeader}></header>
-            <CodeMirror value={value} theme={dracula} height="460px" extensions={[json()]} onChange={onChange}></CodeMirror>
+            <CodeMirror value={props.value} theme={dracula} height="660px" extensions={[json()]} onChange={onChange}></CodeMirror>
         </div>
     )
 }

@@ -1,0 +1,20 @@
+{
+    "environment": {
+        "background-color": [102, 179, 230],
+        "light-position": [2, -20, -5]
+    },
+    "camera": {
+        "position": [0, -2, -5],
+        "lookAt": [0, 0, 0],
+        "FOV": 1
+    },
+    "objects":{
+        "sp": {"type": "sphere", "position": [0, 0, 0], "color": [255, 255, 255], "radius": 2},
+        "pl": {"type": "plane", "position": [0, 0, 0], "color": [1, 1, 1], "n": [0, -1, 0], "h": 1.5, "isCelled": true},
+        "box": {"type": "box", "position": [0, 0, 0], "color": [255, 255, 255], "side": [1, 1, 2]}
+    },
+    "operations":[
+        {"type": "union", "obj1": "scene", "obj2": "box"},
+        {"type": "union", "obj1": "scene", "obj2": "pl"}
+    ]
+}
