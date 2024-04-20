@@ -26,10 +26,10 @@ Current list of operations:
 
 ## Images
 
-###Scene preview
+### Scene preview
 ![Alt text](/public/preview.png "Scene preview")
 
-###Site preview
+### Site preview
 ![Alt text](/public/site_preview.JPG "Site preview")
 
 ## Future
