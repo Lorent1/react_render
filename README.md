@@ -1,6 +1,7 @@
 # Simple React Render
 ## Usage
 This project gives an opportunity to render simple low resolution scenes in browser using SDF function
+
 It uses a `vectors_litemath` library that provides `vec2`, `vec3`, `vec4` classes to work with graphics
 
 You can write your own scene using json file or code editor on web page
@@ -22,6 +23,10 @@ Current list of operations:
 4. `smoothUnion`: {`obj1`: object_name, `obj2`: object_name, `smoothness`: number}
 5. `smoothIntersection`: {`obj1`: object_name, `obj2`: object_name, `smoothness`: number}
 6. `smoothSubtraction`: {`obj1`: object_name, `obj2`: object_name, `smoothness`: number}
+
+## Images
+![Alt text](/public/path/preview.png "Scene preview")
+![Alt text](/public/path/site_preview.JPG "Site preview")
 
 ## Future
 
