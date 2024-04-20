@@ -25,8 +25,8 @@ Current list of operations:
 6. `smoothSubtraction`: {`obj1`: object_name, `obj2`: object_name, `smoothness`: number}
 
 ## Images
-![Alt text](/public/path/preview.png "Scene preview")
-![Alt text](/public/path/site_preview.JPG "Site preview")
+![Alt text](/public/preview.png "Scene preview")
+![Alt text](/public/site_preview.JPG "Site preview")
 
 ## Future
 
