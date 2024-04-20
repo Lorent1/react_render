@@ -3,7 +3,8 @@ import { vec3 } from "vectors_litemath"
 export interface IOperations {
     type: string,
     obj1: string,
-    obj2: string
+    obj2: string,
+    smoothness?: number
 }
 
 export interface ICamera {

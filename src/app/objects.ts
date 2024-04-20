@@ -1,14 +1,10 @@
 import { vec3, vec4, mod } from "vectors_litemath";
 
-function floorVec(op1: vec3){
-    return new vec3(Math.floor(op1.x), Math.floor(op1.y), Math.floor(op1.z))
+function modVec(op1: vec3, op2: number){
+    return new vec3(mod(op1.x, op2), mod(op1.y, op2), mod(op1.z, op2));
 }
 
-function modVec(op1: vec3, op2: vec3){
-    return vec3.sub(op1, vec3.mul(op1, floorVec(vec3.div(op1, op2))));
-}
-
-abstract class Object{
+export abstract class SceneObject{
     constructor(p: vec3, c: vec3){
         this.position = p;
         this.color = c;
@@ -38,7 +34,7 @@ export class Scene{
     value: vec4
 }
 
-export class Sphere extends Object{
+export class Sphere extends SceneObject{
     constructor(p: vec3, c: vec3, r: number){
         super(p, c);
         this.radius = r;
@@ -52,7 +48,7 @@ export class Sphere extends Object{
     radius: number
 }
 
-export class Plane extends Object{
+export class Plane extends SceneObject{
 
     constructor(p: vec3, c: vec3, n: vec3, h: number, isCelled: boolean){
         super(p,c)
@@ -76,7 +72,7 @@ export class Plane extends Object{
     isCelled: boolean
 }
 
-export class Box extends Object{
+export class Box extends SceneObject{
     constructor(p: vec3, c: vec3, s: vec3){
         super(p, c);
         this.side = s;
@@ -85,9 +81,7 @@ export class Box extends Object{
     createObject(p: vec3): vec4 {
         p = this.getPos(p, this.position);
         let q = vec3.sub(vec3.abs(p), this.side);
-
         let box = vec3.lengthVec(vec3.max(q, new vec3(0.0))) + Math.min(Math.max(q.x, Math.max(q.y, q.z)), 0);
-        console.log("here");
         return new vec4(this.color.x, this.color.y, this.color.z, box);
     }
 
@@ -125,8 +119,8 @@ export class MengerSponge extends Box{
     
         let s = 1.0;
     
-        for (let m = 0; m < 5; m++) {
-            let a = vec3.sub(modVec(vec3.mul(p, s), new vec3(2.0)), 1.0);
+        for (let m = 0; m < 3; m++) {
+            let a = vec3.sub(modVec(vec3.mul(p, s), 2.0), 1.0);
             s *= 3.0;
             let r = vec3.abs(vec3.sub(1.0, vec3.mul(3.0, vec3.abs(a))));
     
@@ -146,7 +140,7 @@ export class MengerSponge extends Box{
     scale: number
 }
 
-export class Mandelbulb extends Object{
+export class Mandelbulb extends SceneObject{
     constructor(p: vec3, c: vec3, power: number, scale: number){
         super(p, c);
         this.power = power;

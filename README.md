@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Simple React Render
+## Usage
+This project gives an opportunity to render simple low resolution scenes in browser using SDF function
+It uses a `vectors_litemath` library that provides `vec2`, `vec3`, `vec4` classes to work with graphics
 
-## Getting Started
+You can write your own scene using json file or code editor on web page
 
-First, run the development server:
+Current list of objects you can render:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. `sphere`: {`position`: [x, y, z], `color`: [r, g, b], `radius`: number}
+2. `box`: {`position`: [x, y, z], `color`: [r, g, b], `side`: [x, y, z]}
+3. `roundBox`: {`position`: [x, y, z], `color`: [r, g, b], `side`: [x, y, z], `radius`: number}
+4. `mengerSponge`: {`position`: [x, y, z], `color`: [r, g, b], `side`: [x, y, z], `scale`: number}
+5. `plane`: {`position`: [x, y, z], `color`: [r, g, b], `n`: [x, y, z], `h`: number, `isCelled`: boolean}
+6. `mandelbulb`: {`position`: [x, y, z], `color`: [r, g, b], `side`: [x, y, z], `power`: number, `scale`: number}
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Current list of operations:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. `union`: {`obj1`: object_name, `obj2`: object_name}
+2. `intersection`: {`obj1`: object_name, `obj2`: object_name}
+3. `difference`: {`obj1`: object_name, `obj2`: object_name}
+4. `smoothUnion`: {`obj1`: object_name, `obj2`: object_name, `smoothness`: number}
+5. `smoothIntersection`: {`obj1`: object_name, `obj2`: object_name, `smoothness`: number}
+6. `smoothSubtraction`: {`obj1`: object_name, `obj2`: object_name, `smoothness`: number}
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Future
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+TODO:
+1. Make operations to work as a Tree
+2. Add more objects
+3. Make loading screen
+4. Add support of different resolutions

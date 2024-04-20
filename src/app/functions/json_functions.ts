@@ -48,6 +48,7 @@ function checkJSON(json: string){
 
     let names = new Map<string, number>();
     names.set("scene", 1);
+    names.set("tmp", 1);
 
     for(let key in data.objects){
         checkField(data.objects[key], "position");
@@ -119,7 +120,11 @@ function checkJSON(json: string){
     }
 
     for(let key in data.operations){
+        
+        let operations = ["union", "intersection", "difference", "smoothUnion", "smoothSubtraction", "smoothIntersection"];
         checkField(data.operations[key], "type");
+
+        if (!(operations.includes(data.operations[key]["type"]))) throw Error("Invalid operation type " + data.operations[key]["type"]);
 
         for(let i = 1; i <= 2; i++){
             checkField(data.operations[key], "obj" + i);
@@ -127,6 +132,16 @@ function checkJSON(json: string){
 
             if(!(names.has(name))){
                 throw Error("Can't find " + name + " object");
+            }
+        }
+
+        if (data.operations[key]["type"] == "smoothUnion" || data.operations[key]["type"] == "smoothIntersection"
+            || data.operations[key]["type"] == "smoothSubtraction"
+        ){
+            checkField(data.operations[key], "smoothness")
+
+            if(data.operations[key]["smoothness"] > 1 || data.operations[key]["smoothness"] < 0){
+                throw Error("Smoothness should be in [0, 1]")
             }
         }
     }
@@ -156,18 +171,18 @@ export function parseJSON(json: string, objects: Map<string, any>, operations: A
         }
 
         if (data.objects[key]["type"] == "box"){
-            let side = data.objects[key]["side"];
+            let side = to_vec3(data.objects[key]["side"]);
             obj = new Box(position, color, side);
         }
 
         if (data.objects[key]["type"] == "roundBox"){
-            let side = data.objects[key]["side"];
+            let side = to_vec3(data.objects[key]["side"]);
             let radius = data.objects[key]["radius"];
             obj = new RoundBox(position, color, side, radius);
         }
 
         if (data.objects[key]["type"] == "mengerSponge"){
-            let side = data.objects[key]["side"];
+            let side = to_vec3(data.objects[key]["side"]);
             let scale = data.objects[key]["scale"];
             obj = new MengerSponge(position, color, side, scale);
         }
@@ -186,10 +201,14 @@ export function parseJSON(json: string, objects: Map<string, any>, operations: A
     objects.set("tmp", new Scene(new vec4(1.0, 1.0, 1.0, 51.0)));
 
     for(let i = 0; i < data.operations.length; i++){
-        let dict = {
+        let dict: IOperations = {
             "type": data.operations[i]["type"],
             "obj1": data.operations[i]["obj1"],
             "obj2": data.operations[i]["obj2"]
+        }
+        if (data.operations[i]["type"] == "smoothUnion" || data.operations[i]["type"] == "smoothIntersection"
+        || data.operations[i]["type"] == "smoothSubtraction"){
+            dict.smoothness = data.operations[i]["smoothness"];
         }
         operations.push(dict);
     }

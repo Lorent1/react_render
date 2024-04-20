@@ -9,12 +9,12 @@
         "FOV": 1
     },
     "objects":{
-        "sp": {"type": "sphere", "position": [0, 0, 0], "color": [255, 255, 255], "radius": 2},
+        "sp": {"type": "sphere", "position": [0, 0, 0], "color": [255, 255, 255], "radius": 1},
         "pl": {"type": "plane", "position": [0, 0, 0], "color": [1, 1, 1], "n": [0, -1, 0], "h": 1.5, "isCelled": true},
-        "box": {"type": "box", "position": [0, 0, 0], "color": [255, 255, 255], "side": [1, 1, 2]}
+        "box": {"type": "mengerSponge", "position": [0, 0, 0], "color": [255, 255, 255], "side": [1, 1, 1], "scale": 1.0}
     },
     "operations":[
-        {"type": "union", "obj1": "scene", "obj2": "box"},
-        {"type": "union", "obj1": "scene", "obj2": "pl"}
+        {"type": "union", "obj1": "sp", "obj2": "pl"},
+        {"type": "union", "obj1": "tmp", "obj2": "scene"}
     ]
 }
